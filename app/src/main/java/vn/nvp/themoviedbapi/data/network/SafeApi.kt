@@ -11,23 +11,23 @@ import javax.net.ssl.HttpsURLConnection
 
 abstract class SafeApi {
 
-    suspend inline fun <T> safeApiCall(crossinline callFunction: suspend () -> T): Result<T> {
+    suspend inline fun <T> safeApiCall(crossinline callFunction: suspend () -> T): ResultWrapper<T> {
         return withContext(Dispatchers.IO) {
             try {
-                Result.Success(callFunction.invoke())
+                ResultWrapper.Success(callFunction.invoke())
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
                         val response: Response<*>? = e.response()
                         when (response?.code()) {
                             HttpsURLConnection.HTTP_BAD_REQUEST -> {
-                                Result.Error()
+                                ResultWrapper.Error()
                             }
                             HttpsURLConnection.HTTP_INTERNAL_ERROR -> {
-                                Result.Error()
+                                ResultWrapper.Error()
                             }
                             else -> {
-                                Result.Error()
+                                ResultWrapper.Error()
                             }
                         }
 
@@ -35,17 +35,17 @@ abstract class SafeApi {
                     is IOException -> {
                         when (e) {
                             is UnknownHostException -> {
-                                Result.NetworkError
+                                ResultWrapper.NetworkError
                             }
                             is SocketTimeoutException -> {
-                                Result.NetworkError
+                                ResultWrapper.NetworkError
                             }
                             else -> {
-                                Result.NetworkError
+                                ResultWrapper.NetworkError
                             }
                         }
                     }
-                    else -> Result.Error(null, null)
+                    else -> ResultWrapper.Error(null, null)
                 }
             }
         }
