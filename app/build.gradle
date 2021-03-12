@@ -18,9 +18,19 @@ android {
     }
 
     buildTypes {
+        debug {
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        switch (variant.getName()) {
+            case "debug":
+                variant.buildConfigField "String", "API_URL", '"https://api.themoviedb.org/3/"'
+                variant.buildConfigField "String", "API_THEMOVIEDB_KEY", '"86d6ec6eb4e43283469739396a609eee"'
         }
     }
     compileOptions {
@@ -39,6 +49,22 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    // Retrofit and relevant converters
+    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$architecture_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$architecture_version"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
