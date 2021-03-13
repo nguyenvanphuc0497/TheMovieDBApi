@@ -9,6 +9,9 @@ import vn.nvp.themoviedbapi.R
 import vn.nvp.themoviedbapi.extentions.replaceFragment
 import vn.nvp.themoviedbapi.ui.base.BaseFragment
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 class HomeFragment : BaseFragment<HomeViewModel>() {
     override fun viewModel(): HomeViewModel = viewModel<HomeViewModel>().value
 

@@ -4,6 +4,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import vn.nvp.themoviedbapi.BuildConfig
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var req = chain.request()

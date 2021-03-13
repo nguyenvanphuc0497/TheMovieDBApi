@@ -11,6 +11,9 @@ import vn.nvp.themoviedbapi.data.repository.MovieRepository
 import vn.nvp.themoviedbapi.data.vo.MovieResponse
 import vn.nvp.themoviedbapi.ui.base.BaseViewModel
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 class HomeViewModel : BaseViewModel(), KoinComponent {
     private val movieRepository by inject<MovieRepository>()
     private val movieResult = MutableLiveData<MovieResponse>()

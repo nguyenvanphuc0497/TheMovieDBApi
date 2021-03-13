@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 import vn.nvp.themoviedbapi.extentions.getStatusBarHeight
 import vn.nvp.themoviedbapi.util.EventObserver
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,

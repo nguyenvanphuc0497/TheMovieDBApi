@@ -9,6 +9,9 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.net.ssl.HttpsURLConnection
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 abstract class SafeApi {
 
     suspend inline fun <T> safeApiCall(crossinline callFunction: suspend () -> T): ResultWrapper<T> {

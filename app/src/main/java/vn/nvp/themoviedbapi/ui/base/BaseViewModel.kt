@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import vn.nvp.themoviedbapi.util.Event
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 abstract class BaseViewModel : ViewModel() {
     private val loadingProgress = MutableLiveData<Event<Boolean>>()
     private val apiException = MutableLiveData<Event<String>>()

@@ -1,5 +1,8 @@
 package vn.nvp.themoviedbapi.data.vo
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 data class Movie(
     val adult: String,
     val original_language: String,

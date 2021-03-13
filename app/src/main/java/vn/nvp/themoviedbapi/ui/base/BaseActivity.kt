@@ -5,6 +5,9 @@ import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 abstract class BaseActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,6 +5,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import vn.nvp.themoviedbapi.di.appModule
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 class App : Application() {
 
     override fun onCreate() {

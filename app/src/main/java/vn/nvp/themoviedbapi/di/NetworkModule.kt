@@ -10,6 +10,9 @@ import vn.nvp.themoviedbapi.BuildConfig
 import vn.nvp.themoviedbapi.data.MovieApiService
 import vn.nvp.themoviedbapi.data.network.AuthInterceptor
 
+/**
+ * Create by Nguyen Van Phuc on 3/11/21
+ */
 val networkModule = module {
     factory { AuthInterceptor() }
     factory { provideOkHttpClient(get()) }
