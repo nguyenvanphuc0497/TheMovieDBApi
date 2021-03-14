@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="5dp">
+
+    <ImageView
+        android:id="@+id/imgPosterMovie"
+        android:layout_width="125dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitleMovie"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tvDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/progressBarRating"
+        app:layout_constraintStart_toEndOf="@id/imgPosterMovie"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tom and Jerry" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@id/tvDuration"
+        app:layout_constraintEnd_toEndOf="@id/tvTitleMovie"
+        app:layout_constraintStart_toStartOf="@id/tvTitleMovie"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleMovie"
+        tools:text="2021-02-11" />
+
+    <vn.nvp.themoviedbapi.util.CircleProgressBar
+        android:id="@+id/progressBarRating"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:progress="100"
+        app:progressBarThickness="8dp"
+        app:progressbarColor="@color/mercury" />
+
+    <TextView
+        android:id="@+id/tvDuration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@id/tvOverview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvTitleMovie"
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
+        tools:text="Caption Marvel" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvTitleMovie"
+        app:layout_constraintTop_toBottomOf="@id/tvDuration"
+        tools:text="Tom the cat and Jerry the mouse get kicked out of their home and relocate to a fancy New York hotel, where a scrappy employee named Kayla will lose her job if she can’t evict Jerry before a high-class wedding at the hotel. Her solution? Hiring Tom to get rid of the pesky mouse.Tom the cat and Jerry the mouse get kicked out of their home and relocate to a fancy New York hotel, where a scrappy employee named Kayla will lose her job if she can’t evict Jerry before a high-class wedding at the hotel. Her solution? Hiring Tom to get rid of the pesky mouse." />
+</androidx.constraintlayout.widget.ConstraintLayout>

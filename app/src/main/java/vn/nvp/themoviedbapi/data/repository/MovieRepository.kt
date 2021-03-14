@@ -12,4 +12,8 @@ class MovieRepository(private val movieApi: MovieApiService) : SafeApi() {
     suspend fun getListMoviePopular(): ResultWrapper<MovieResponse> = safeApiCall {
         movieApi.getListMoviePopular()
     }
+
+    suspend fun getListMovieNowPlaying(): ResultWrapper<MovieResponse> = safeApiCall {
+        movieApi.getListMovieNowPlaying()
+    }
 }

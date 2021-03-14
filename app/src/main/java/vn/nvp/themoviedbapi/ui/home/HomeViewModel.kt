@@ -16,20 +16,38 @@ import vn.nvp.themoviedbapi.ui.base.BaseViewModel
  */
 class HomeViewModel : BaseViewModel(), KoinComponent {
     private val movieRepository by inject<MovieRepository>()
-    private val movieResult = MutableLiveData<MovieResponse>()
+    private val moviePlayingNowResult = MutableLiveData<MovieResponse?>()
+    private val moviePopularResult = MutableLiveData<MovieResponse?>()
 
     init {
         callApi()
     }
 
-    fun getMovieResult(): LiveData<MovieResponse> = movieResult
+    fun getMoviePlayingNowResult(): LiveData<MovieResponse?> = moviePlayingNowResult
+
+    fun getMoviePopularResult(): LiveData<MovieResponse?> = moviePopularResult
 
     private fun callApi() {
         viewModelScope.launch {
             postStateLoadingProgress(isLoading = true)
             when (val movie = movieRepository.getListMoviePopular()) {
                 is ResultWrapper.Success -> {
-                    movieResult.postValue(movie.data!!)
+                    moviePopularResult.postValue(movie.data)
+                }
+                is ResultWrapper.NetworkError -> {
+                    postApiException("Network Error")
+                }
+                is ResultWrapper.Error -> {
+                    postApiException(movie.msg ?: "Generic Error")
+                }
+            }
+            postStateLoadingProgress(isLoading = false)
+        }
+        viewModelScope.launch {
+            postStateLoadingProgress(isLoading = true)
+            when (val movie = movieRepository.getListMovieNowPlaying()) {
+                is ResultWrapper.Success -> {
+                    moviePlayingNowResult.postValue(movie.data)
                 }
                 is ResultWrapper.NetworkError -> {
                     postApiException("Network Error")

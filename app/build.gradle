@@ -32,6 +32,7 @@ android {
             case "debug":
                 variant.buildConfigField "String", "API_URL", '"https://api.themoviedb.org/3/"'
                 variant.buildConfigField "String", "API_THEMOVIEDB_KEY", '"86d6ec6eb4e43283469739396a609eee"'
+                variant.buildConfigField "String", "IMAGE_BASE_URL", '"https://image.tmdb.org/t/p/original"'
         }
     }
     compileOptions {
@@ -63,8 +64,12 @@ dependencies {
     implementation "org.koin:koin-android:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
+    // Lifecycle architecture
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$architecture_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$architecture_version"
+
+    // Load image from internet
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
