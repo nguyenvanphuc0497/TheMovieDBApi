@@ -9,8 +9,8 @@ import vn.nvp.themoviedbapi.data.vo.MovieResponse
  * Create by Nguyen Van Phuc on 3/11/21
  */
 class MovieRepository(private val movieApi: MovieApiService) : SafeApi() {
-    suspend fun getListMoviePopular(): ResultWrapper<MovieResponse> = safeApiCall {
-        movieApi.getListMoviePopular()
+    suspend fun getListMoviePopular(page: Int = 1): ResultWrapper<MovieResponse> = safeApiCall {
+        movieApi.getListMoviePopular(page = page)
     }
 
     suspend fun getListMovieNowPlaying(): ResultWrapper<MovieResponse> = safeApiCall {

@@ -17,8 +17,8 @@ data class Movie(
 )
 
 data class MovieResponse(
-    val page: String,
+    val page: Int,
     val results: List<Movie>,
-    val total_pages: String,
+    val total_pages: Int,
     val total_results: String
 )

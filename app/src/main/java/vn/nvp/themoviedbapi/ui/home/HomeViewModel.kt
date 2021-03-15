@@ -8,6 +8,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import vn.nvp.themoviedbapi.data.network.ResultWrapper
 import vn.nvp.themoviedbapi.data.repository.MovieRepository
+import vn.nvp.themoviedbapi.data.vo.Movie
 import vn.nvp.themoviedbapi.data.vo.MovieResponse
 import vn.nvp.themoviedbapi.ui.base.BaseViewModel
 
@@ -17,22 +18,42 @@ import vn.nvp.themoviedbapi.ui.base.BaseViewModel
 class HomeViewModel : BaseViewModel(), KoinComponent {
     private val movieRepository by inject<MovieRepository>()
     private val moviePlayingNowResult = MutableLiveData<MovieResponse?>()
-    private val moviePopularResult = MutableLiveData<MovieResponse?>()
+    private val moviePopularResult = MutableLiveData<List<Movie>>()
+    private var listMoviePopularResult = mutableListOf<Movie>()
+    internal val sizeListMoviePopular: Int
+        get() = listMoviePopularResult.size
 
     init {
         callApi()
     }
 
-    fun getMoviePlayingNowResult(): LiveData<MovieResponse?> = moviePlayingNowResult
+    internal fun getMoviePlayingNowResult(): LiveData<MovieResponse?> = moviePlayingNowResult
 
-    fun getMoviePopularResult(): LiveData<MovieResponse?> = moviePopularResult
+    internal fun getMoviePopularResult(): MutableLiveData<List<Movie>> = moviePopularResult
+
+    internal fun isHasLoadMore() = !isLoading && currentPage < totalPage
+
+    internal fun loadMoreListMoviePopular() {
+        callApiGetMoviePopular(currentPage + 1)
+    }
 
     private fun callApi() {
+        callApiGetMovieNowPlaying()
+        callApiGetMoviePopular()
+    }
+
+    private fun callApiGetMoviePopular(page: Int = 1) {
         viewModelScope.launch {
-            postStateLoadingProgress(isLoading = true)
-            when (val movie = movieRepository.getListMoviePopular()) {
+            isLoading = true
+            when (val movie = movieRepository.getListMoviePopular(page)) {
                 is ResultWrapper.Success -> {
-                    moviePopularResult.postValue(movie.data)
+                    handleDataChange(
+                        movie.data.results.toMutableList(),
+                        listMoviePopularResult,
+                        moviePopularResult
+                    )
+                    currentPage = movie.data.page
+                    totalPage = movie.data.total_pages
                 }
                 is ResultWrapper.NetworkError -> {
                     postApiException("Network Error")
@@ -41,10 +62,12 @@ class HomeViewModel : BaseViewModel(), KoinComponent {
                     postApiException(movie.msg ?: "Generic Error")
                 }
             }
-            postStateLoadingProgress(isLoading = false)
+            isLoading = false
         }
+    }
+
+    private fun callApiGetMovieNowPlaying() {
         viewModelScope.launch {
-            postStateLoadingProgress(isLoading = true)
             when (val movie = movieRepository.getListMovieNowPlaying()) {
                 is ResultWrapper.Success -> {
                     moviePlayingNowResult.postValue(movie.data)
@@ -56,7 +79,6 @@ class HomeViewModel : BaseViewModel(), KoinComponent {
                     postApiException(movie.msg ?: "Generic Error")
                 }
             }
-            postStateLoadingProgress(isLoading = false)
         }
     }
 }
