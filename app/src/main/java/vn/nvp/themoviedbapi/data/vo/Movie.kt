@@ -1,8 +1,12 @@
 package vn.nvp.themoviedbapi.data.vo
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  * Create by Nguyen Van Phuc on 3/11/21
  */
+@Parcelize
 data class Movie(
     val adult: String,
     val original_language: String,
@@ -14,7 +18,7 @@ data class Movie(
     val poster_path: String,
     val overview: String,
     val release_date: String,
-)
+) : Parcelable
 
 data class MovieResponse(
     val page: Int,

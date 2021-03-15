@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import vn.nvp.themoviedbapi.extentions.getStatusBarHeight
 import vn.nvp.themoviedbapi.util.EventObserver
 
 /**
@@ -29,17 +27,27 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         handelApiException()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+        initEvents()
+    }
+
     open fun createViewForFragment(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(getLayoutResource(), container, false)
-        view.content.run {
-            setPadding(left, top + context.getStatusBarHeight(), right, bottom)
-        }
+//        view.content.run {
+//            setPadding(left, top + context.getStatusBarHeight(), right, bottom)
+//        }
         return view
     }
+
+    protected open fun initViews() = Unit
+
+    protected open fun initEvents() = Unit
 
     abstract fun viewModel(): VM
 

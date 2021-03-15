@@ -14,6 +14,7 @@ import vn.nvp.themoviedbapi.ui.base.BaseListAdapter
  * Create by Nguyen Van Phuc on 3/13/21
  */
 class MovieNowPlayingAdapter : BaseListAdapter<Movie>(ItemDiffUntil()) {
+    internal var onItemClick: (movie: Movie) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
         ItemViewHolder(
@@ -22,6 +23,12 @@ class MovieNowPlayingAdapter : BaseListAdapter<Movie>(ItemDiffUntil()) {
         )
 
     inner class ItemViewHolder(view: View) : BaseViewHolder(view) {
+        init {
+            itemView.setOnClickListener {
+                onItemClick.invoke(getItem(adapterPosition))
+            }
+        }
+
         override fun onBind() {
             Glide
                 .with(itemView)

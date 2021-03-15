@@ -13,7 +13,7 @@ abstract class BaseActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // full screen
-        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        //window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         // set Content View
         createViewForActivity(savedInstanceState)
     }
